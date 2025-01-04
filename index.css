@@ -1,10 +1,10 @@
 body{
-    background-image: linear-gradient(170deg , rgb(0, 245, 141) , rgb(0, 163, 244));
+    background-image: linear-gradient(110deg , rgb(0, 245, 141) , rgb(0, 163, 244));
 }
 #mainbx{
 width: 55%;
 height: 80%;
-position: absolute;
+position: fixed;
 display: flex;
 background-color: rgb(60, 60, 60);
 left: 8%;
@@ -52,13 +52,14 @@ height: fit-content;
 display: flex;
 align-items: center;
 row-gap: 10px;
+margin-bottom: 40px;
 flex-direction: column;}
 #create{width: 100%;
 height: fit-content;
 display: none;
 align-items: center;
 row-gap: 10px;
-flex-direction: column;}
+flex-direction: column;margin-bottom: 100px;}
 #months{width: 100%;
 height: fit-content;
 display: none;
@@ -79,7 +80,7 @@ display: flex;
 align-items: center;
 row-gap: 10px;
 flex-direction: column;
-position: absolute;
+position: fixed;
 background-color: rgb(60, 60, 60);
 overflow-y: scroll;
 right: 8%;
@@ -94,7 +95,7 @@ box-shadow: -4px 4px 4px rgba(46, 46, 46, 0.47);
     background-image: linear-gradient(170deg , rgb(0, 245, 141) , rgb(0, 163, 244));
     border: 0px;
     height: 40px;
-    margin-left: 58%;
+    margin-left: 53%;
 }
 #right{
     width: 50px;
@@ -104,7 +105,7 @@ box-shadow: -4px 4px 4px rgba(46, 46, 46, 0.47);
     background-image: linear-gradient(170deg , rgb(0, 245, 141) , rgb(0, 163, 244));
     border: 0px;
 }
-h1{color: white; font-size: 30px;}
+h1{color: white; font-size: 30px; width: 100px;}
 #topbar{
     display: flex;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -199,7 +200,7 @@ justify-content: center;
 align-items: center;
 margin-top: -25px;
 justify-content: center;
-border: 1px solid rgb(0, 225, 255);
+
 }
 #bartrack{
     border-bottom: 1px solid white;
@@ -207,22 +208,25 @@ border: 1px solid rgb(0, 225, 255);
     margin-bottom: 20px;
     width: 80%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: end;
+    overflow-x: scroll;
+    justify-content: start;
     padding-left: 10px;
     padding-right: 10px;
 }
+#bartrack::-webkit-scrollbar{display: none;}
 .bar{
     height: 100%;
     background-color: aqua;
     max-width: 50px;
 width: 50px;
 min-width: 10px;
+min-height: 10px;
 display: flex;
 align-items: center;
 justify-content: center;
 }
-.innertxt{rotate: 270deg; font-size: 14px;}
+.innertxt{rotate: 270deg; font-size: 14px; }
 #timing{background-color: transparent; border: 0px;  color: white; padding-bottom: 5px;}
 #addbtn{
     width: 25px;
@@ -253,12 +257,16 @@ justify-content: center;
     height: 25px;
     padding: 10px;
     border-radius: 40px;
+
 }
 #btns{
-    position: absolute; bottom: 10px;
+    position: fixed; 
     display: flex;
+    bottom: 12%;
+    width: 200px;
     column-gap: 10px;
-    right: 10px;
+    justify-content: end;
+   right: 8%;
 }
 #name{
     background-color: transparent;
@@ -275,3 +283,25 @@ color: white;
  border-radius: 10px;
   background-image: linear-gradient(90deg, rgb(0, 115, 255), rgb(0, 238, 255));
 }
+#auxclick{
+    width: 120px;
+    height: 60px;
+    background-color: rgb(77, 77, 77);
+    border-radius: 7px;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 13px;
+    row-gap: 10px;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+}
+#editxt{
+    margin: 0;
+    text-decoration: underline;
+}
+#deltxt{margin: 0; text-decoration: underline; margin-bottom: 5px;}
