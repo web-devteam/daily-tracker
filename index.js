@@ -245,6 +245,11 @@ for (let index = 0; index < trackertaskarray.length; index++) {
 if(index!=trackertaskarray.length-1 && trackertaskarray[0]==""){console.log(index)
 document.getElementsByClassName("checkbox").item(index).style.backgroundColor="transparent"
 document.getElementsByClassName("apply").item(index).innerText="check"
+}
+else{
+    console.log(index)
+document.getElementsByClassName("checkbox").item(index).style.backgroundColor="transparent"
+document.getElementsByClassName("apply").item(index).innerText="check"
 }}
     let target = currentmonth+currentday
     console.log(target)
