@@ -791,7 +791,7 @@ console.log(wkend)
 }}
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('/daily-tracker/sw.js')
     .then(function(registration) {
         console.log('Service Worker registered with scope:', registration.scope);
     }).catch(function(error) {
