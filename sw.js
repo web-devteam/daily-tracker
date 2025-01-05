@@ -2,8 +2,8 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open('offline-cache').then(cache => {
             return cache.addAll([
-                '/',
-                '/offline.html',
+                '/daily-tracker/',
+                '/daily-tracker/offline.html'
             ]);
         })
     );
@@ -12,7 +12,9 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
     if (!navigator.onLine) {
         event.respondWith(
-            caches.match('/offline.html')
+            caches.match(event.request).then(response => {
+                return response || caches.match('/daily-tracker/offline.html');
+            })
         );
     } else {
         event.respondWith(
