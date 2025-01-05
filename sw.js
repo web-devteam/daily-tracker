@@ -1,24 +1,22 @@
+const CACHE_NAME = 'offline-cache';
+const OFFLINE_URL = '/daily-tracker/offline.html'; // Update the path based on your repo name
+
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open('offline-cache').then(cache => {
-            return cache.addAll([
-    
-                '/daily-tracker/offline.html'
-            ]);
+        caches.open(CACHE_NAME).then(cache => {
+            return cache.addAll([OFFLINE_URL]);
         })
     );
 });
 
 self.addEventListener('fetch', event => {
-    if (!navigator.onLine) {
+    if (event.request.mode === 'navigate') {
         event.respondWith(
-            caches.match(event.request).then(response => {
-                return response || caches.match('/daily-tracker/offline.html');
+            fetch(event.request).catch(() => {
+                return caches.open(CACHE_NAME).then(cache => {
+                    return cache.match(OFFLINE_URL);
+                });
             })
-        );
-    } else {
-        event.respondWith(
-            fetch(event.request)
         );
     }
 });
