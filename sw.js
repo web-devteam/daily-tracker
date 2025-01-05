@@ -2,7 +2,7 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open('offline-cache').then(cache => {
             return cache.addAll([
-                '/daily-tracker/',
+    
                 '/daily-tracker/offline.html'
             ]);
         })
