@@ -31,7 +31,7 @@ date=date.toLocaleDateString()
 let month =  date.slice(3, 5)
 date = date.slice(0, 2)
 let alphaday = new Date
-
+let exdate=date
 alphaday=alphaday.toDateString().slice(0, 3).toLowerCase()
 currentday = date
 console.log(date)
@@ -74,6 +74,7 @@ create4.className="checkbox"
 create5.className="color"
 create2.innerHTML=trackertaskarray[index]
 create3.innerHTML="double click for more info"
+create3.style.fontSize="13px"
 create5.style.background=trackertaskarraycolor[index]
 let index1=create5.style.backgroundColor.indexOf(",")
 let index2=create5.style.backgroundColor.lastIndexOf(",")
@@ -98,7 +99,9 @@ document.getElementById("scroll").append(create)
 document.getElementById("scroll").style.flexDirection="column-reverse"
 selected=create2.innerHTML
 
-create.addEventListener("click", ()=>{selected=create2.innerHTML; console.log(selected); allocate()})
+create.addEventListener("click", ()=>{selected=create2.innerHTML; console.log(selected); 
+ allocate()
+})
 create.addEventListener("auxclick", (e)=>{
     e.preventDefault()
     document.getElementById("auxclick").style.display="flex"
@@ -120,7 +123,9 @@ for (let index1 = 0; index1 < 12; index1++) {
 let cmonth = monthtxt[index1]
 for (let index0 = 0; index0 < 35; index0++) {
 
-let target = cmonth+index0
+let target = ""
+if(index0<10){ target = cmonth+"0"+index0 }
+else{ target = cmonth+index0 }
 let createdarray = []
 for (let index = 0; index < trackermasterarray.length; index++) {
 if(trackermasterarray[index].includes(target) && trackermasterarray[index].includes(selected) ){
@@ -209,10 +214,19 @@ else if(alphaday=="thu"){wkend=parseInt(date)+3}
 else if(alphaday=="fri"){wkend=parseInt(date)+2}
 else if(alphaday=="sat"){wkend=parseInt(date)+1}
 else if(alphaday=="sun"){wkend=parseInt(date)}
+
+if(wkend>35){wkend=wkend-35; wkstart=wkstart-35}
+else if(wkend>28){wkend=wkend-28; wkstart=wkstart-28}
+else if(wkend>21){wkend=wkend-21; wkstart=wkstart-21}
+else if(wkend>14){wkend=wkend-14; wkstart=wkstart-14}
+else if(wkend>7){wkend=wkend-7; wkstart=wkstart-7}
+console.log(wkstart)
+console.log(wkend)
 wkstart=0
 let order = ""
 for (let index = 0; index < 7; index++) {
 if(wkend>0){wkend=wkend-1
+    
     document.getElementsByClassName("weekday").item(wkend).innerHTML=days[6-index]
 } 
 else{
@@ -241,6 +255,7 @@ for (let index = 0; index < monthlength[locator]; index++) {
 document.getElementsByClassName("dayno").item(index).style.border="2px solid rgb(60, 60, 60)"
 }
 create2.style.border="2px solid "+gencolor
+exdate=Number(create2.innerHTML)
 for (let index = 0; index < trackertaskarray.length; index++) {
 if(index!=trackertaskarray.length-1 && trackertaskarray[0]==""){console.log(index)
 document.getElementsByClassName("checkbox").item(index).style.backgroundColor="transparent"
@@ -397,13 +412,15 @@ console.log(bararray)
 for (let index = 0; index < 7; index++) {
 let target = ""
 if(before==false){adding=1
-target=monthtxt[parseInt(month)-adding]+(wkstart+index)
+if((wkstart+index)<10){target=monthtxt[parseInt(month)-adding]+"0"+(wkstart+index)}
+else{target=monthtxt[parseInt(month)-adding]+(wkstart+index)}
 console.log(target)
 if(wkstart+index>monthlength[parseInt(month)-1]){
     wkstart=index-(index*2); adding=0
 }}
 else{adding=2
-   target=monthtxt[parseInt(month)-adding]+(wkstart+index)
+if((wkstart+index)<10){target=monthtxt[parseInt(month)-adding]+"0"+(wkstart+index)}
+else{target=monthtxt[parseInt(month)-adding]+(wkstart+index)}
 console.log(target)
 if(wkstart+index+1>monthlength[parseInt(month)-2]){
     wkstart=index-(index*2); adding=1
@@ -490,7 +507,7 @@ if(pos<11){pos=pos+1}
     currentmonth=monthtxt[pos]
     currentday=null
     locator = monthtxt.indexOf(currentmonth)
-    
+    exdate=null
     for (let index = 0; index < monthlength[locator]; index++) {
 document.getElementsByClassName("dayno").item(index).style.color="white"
 document.getElementsByClassName("dayno").item(index).style.border="2px solid rgb(60, 60, 60)"
@@ -502,7 +519,7 @@ if(newvalue>monthlength[locator]){document.getElementsByClassName("dayno").item(
 document.getElementsByClassName("dayno").item(index).style.backgroundColor="transparent"   
 document.getElementsByClassName("dayno").item(index).style.backgroundImage=""  
 }
-if(document.getElementById("mainmonth").innerHTML==monthtxt[Number(month)-1]){document.getElementsByClassName("dayno").item(Number(date)-1).style.border="2px solid "+gencolor}
+if(document.getElementById("mainmonth").innerHTML==monthtxt[Number(month)-1]){document.getElementsByClassName("dayno").item(Number(date)-1).style.border="2px solid "+gencolor; exdate=Number(date)}
 allocate()
 let wkstart=0
 let wkend=0
@@ -552,7 +569,7 @@ if(pos>0){pos=pos-1}
     currentmonth=monthtxt[pos]
     currentday=null
     locator = monthtxt.indexOf(currentmonth)
-    
+    exdate=null
     for (let index = 0; index < monthlength[locator]; index++) {
 document.getElementsByClassName("dayno").item(index).style.color="white"
 document.getElementsByClassName("dayno").item(index).style.border="2px solid rgb(60, 60, 60)"
@@ -563,7 +580,7 @@ if(newvalue>monthlength[locator]){document.getElementsByClassName("dayno").item(
 document.getElementsByClassName("dayno").item(index).style.backgroundColor="transparent"   
 document.getElementsByClassName("dayno").item(index).style.backgroundImage="" 
 }
-if(document.getElementById("mainmonth").innerHTML==monthtxt[Number(month)-1]){document.getElementsByClassName("dayno").item(Number(date)-1).style.border="2px solid "+gencolor}
+if(document.getElementById("mainmonth").innerHTML==monthtxt[Number(month)-1]){document.getElementsByClassName("dayno").item(Number(date)-1).style.border="2px solid "+gencolor; exdate=Number(date)}
 allocate()
 let smallerarrya = arrayweek[pos].split(">")
 console.log(smallerarrya)
@@ -596,6 +613,7 @@ if(trackermasterarray[index].includes(target) && trackermasterarray[index].inclu
 let color = trackermasterarray[index].indexOf("rgb")
 let color2 = trackermasterarray[index].indexOf(")")
 color = trackermasterarray[index].slice(color, color2+1).replaceAll("#", "")
+if(exdate!=null){document.getElementsByClassName("dayno").item(exdate-1).style.border="2px solid "+color}
 gencolor=color
 document.getElementsByClassName("dayno").item(index0-1).style.backgroundColor=color}
 }
@@ -789,13 +807,3 @@ console.log(wkstart)
 console.log(wkend)
 }
 }}
-
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/daily-tracker/sw.js')
-    .then(function(registration) {
-        console.log('Service Worker registered with scope:', registration.scope);
-    }).catch(function(error) {
-        console.log('Service Worker registration failed:', error);
-    });
-}
-
