@@ -463,7 +463,9 @@ bararray[bararray.length]=0}
 }
 console.log(bararray)
 for (let index = 0; index < monthlength[parseInt(month)-1]; index++) {
-let target = monthtxt[parseInt(month)-1]+index
+let target = ""
+if(index<10){target=monthtxt[parseInt(month)-1]+"0"+index} 
+else{target=monthtxt[parseInt(month)-1]+index} 
 console.log(target)
 
 for (let index1 = 0; index1 < trackermasterarray.length; index1++) {
